@@ -5,35 +5,51 @@ import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Main from "./components/Main/Main";
 
+import axios from "axios";
+
+//redux
+
+import { setAnime } from "./redux/actions/anime";
+import { useDispatch, useSelector } from "react-redux";
+
 function App() {
-  const [animeList, setAnimeList] = useState([]);
+  const dispatch = useDispatch();
+
   const [topAnime, setTopAnime] = useState([]);
   const [search, setSearch] = useState("");
 
-  const GetTopAnime = async () => {
-    const temp = await fetch(
-      `https://api.jikan.moe/v3/top/anime/1/bypopularity`
-    ).then(res => res.json());
+  const [videos, setVideos] = useState([]);
 
-    setTopAnime(temp.top.slice(0, 5));
+  const GetTopAnime = () => {
+    axios
+      .get(`https://api.jikan.moe/v3/top/anime/1/bypopularity`)
+      .then(res => dispatch(setAnime(res.data.top.slice(0, 12))));
   };
 
   const HandleSearch = e => {
     e.preventDefault();
-
     FetchAnime(search);
   };
 
-  const FetchAnime = async query => {
-    const temp = await fetch(
-      `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=10`
-    ).then(res => res.json());
+  const FetchAnime = query => {
+    axios
+      .get(
+        `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=12`
+      )
+      .then(res => dispatch(setAnime(res.data.results)));
+  };
 
-    setAnimeList(temp.results);
+  const testCheck = async query => {
+    const temp = await fetch(`https://api.jikan.moe/v3/anime/1 `).then(res =>
+      res.json()
+    );
+    // console.log(temp);
+    setVideos(temp.episodes);
   };
 
   useEffect(() => {
     GetTopAnime();
+    testCheck("Death Note");
   }, []);
 
   return (
@@ -45,7 +61,6 @@ function App() {
           search={search}
           setSearch={setSearch}
           HandleSearch={HandleSearch}
-          animeList={animeList}
         />
       </div>
     </div>

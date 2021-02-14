@@ -3,7 +3,6 @@ import React from "react";
 import "./Sidebar.scss";
 
 function Sidebar({ topAnime }) {
-  console.log(topAnime);
   return (
     <aside className="sidebar">
       <h2 className="sidebar__title">Топ аниме</h2>
