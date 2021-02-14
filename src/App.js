@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./scss/style.scss";
 
 import Header from "./components/Header/Header";
-import Sidebar from "./components/Header/Sidebar/Sidebar";
-import Main from "./components/Header/Main/Main";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Main from "./components/Main/Main";
 
 function App() {
   const [animeList, setAnimeList] = useState([]);
