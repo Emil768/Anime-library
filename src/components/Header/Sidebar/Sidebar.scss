@@ -1,0 +1,17 @@
+.sidebar {
+  &__title {
+    margin-bottom: 10px;
+  }
+  &__item {
+    margin-bottom: 5px;
+    padding: 8px 20px;
+    border: 1px solid #e7e7e7;
+    border-radius: 30px;
+
+    // text-align: center;
+    transition: all ease 0.3s;
+    // &:hover {
+    //   cursor: pointer;
+    // }
+  }
+}
