@@ -3,6 +3,7 @@ import React from "react";
 import "./Main.scss";
 
 import AnimeCard from "../AnimeCard/AnimeCard";
+import emptyGif from "../../img/anime-empty.gif"
 import { useDispatch, useSelector } from "react-redux";
 
 import { setAnimeInfo } from "../../redux/actions/animeInfo";
@@ -29,15 +30,25 @@ function Main({ HandleSearch, setSearch, search }) {
         />
       </form>
       <ul className="anime-list">
-        {items.map(anime => {
-          return (
-            <AnimeCard
-              key={anime.mal_id}
-              {...anime}
-              handlerInfo={handlerAnimeInfo}
-            />
-          );
-        })}
+        {
+          items.length? 
+          items.map(anime => {
+            return (
+              <AnimeCard
+                key={anime.mal_id}
+                {...anime}
+                handlerInfo={handlerAnimeInfo}
+              />
+            );
+          })
+          :
+          <li>
+            <h3>Аниме по такому названию не найдены😟</h3>
+            <figure>
+              <img src={emptyGif} alt=""/>
+            </figure>
+          </li>
+        }
       </ul>
     </main>
   );
