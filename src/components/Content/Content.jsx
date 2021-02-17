@@ -38,17 +38,17 @@ function Content() {
       .then(res => dispatch(setAnime(res.data.results,type)));
   };
 
-  const testCheck = async query => {
-    const temp = await fetch(`https://api.jikan.moe/v3/anime/1 `).then(res =>
-      res.json()
+  const testCheck =  query => {
+    axios.get(`https://api.jikan.moe/v3/anime/1/stats `).then(res =>
+      console.log(res.data)
     );
     
-    setVideos(temp.episodes);
+    // setVideos(temp.episodes);
   };
 
   useEffect(() => {
     GetTopAnime();
-    testCheck("Death Note");
+      // testCheck()
   }, []);
     return (
         <div className="App__content">

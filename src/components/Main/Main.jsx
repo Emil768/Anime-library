@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./Main.scss";
 
@@ -6,15 +6,26 @@ import AnimeCard from "../AnimeCard/AnimeCard";
 import emptyGif from "../../img/anime-empty.gif"
 import { useDispatch, useSelector } from "react-redux";
 
-import { setAnimeInfo } from "../../redux/actions/animeInfo";
+import {setModalActive} from "../../redux/actions/modal"
+import axios from "axios";
+import Modal from "../Modal/Modal";
 
 function Main({ HandleSearch, setSearch, search }) {
   const dispatch = useDispatch();
-  const { items } = useSelector(state => state.anime);
+  const { items,type } = useSelector(state => state.anime);
+  const [cardInfo,setCardInfo] = useState("")
+  
 
   const handlerAnimeInfo = id => {
-    dispatch(setAnimeInfo(id));
+    getInfoAnime(id)
+    dispatch(setModalActive())
   };
+
+  const getInfoAnime = (id) =>{
+    axios.get(`https://api.jikan.moe/v3/${type}/${id}`).then(res =>
+     setCardInfo(res.data)
+    );
+  }
 
   return (
     <main className="main">
@@ -33,11 +44,13 @@ function Main({ HandleSearch, setSearch, search }) {
         {
           items.length? 
           items.map(anime => {
+            // console.log(anime)
             return (
               <AnimeCard
                 key={anime.mal_id}
                 {...anime}
                 handlerInfo={handlerAnimeInfo}
+                
               />
             );
           })
@@ -50,6 +63,7 @@ function Main({ HandleSearch, setSearch, search }) {
           </li>
         }
       </ul>
+      <Modal data = {cardInfo}/>
     </main>
   );
 }

@@ -3,11 +3,12 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import anime from "./reducers/anime";
-import animeInfo from "./reducers/animeInfo";
+
+import modal from "./reducers/modal"
 
 let rootReducer = combineReducers({
   anime,
-  animeInfo,
+  modal
 });
 
 const store = createStore(rootReducer, composeWithDevTools());
