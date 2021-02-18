@@ -40,6 +40,7 @@ function Main({ HandleSearch, setSearch, search }) {
           required
         />
       </form>
+      <h3>Найдено результатов: {`(${items.length})`}</h3>
       <ul className="anime-list">
         {
           items.length? 

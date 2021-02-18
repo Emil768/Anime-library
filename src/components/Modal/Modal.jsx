@@ -5,6 +5,9 @@ import * as moment from "moment/moment";
 import "moment/locale/ru";
 import "./Modal.scss";
 
+
+import {ClipLoader} from "react-spinners";
+
 import {setModalClose} from "../../redux/actions/modal"
 
 
@@ -14,24 +17,21 @@ function Modal({data}) {
     const {state} = useSelector(state=>state.modal)
     const modalContent = useRef();
 
+    const [loading,setLoading] = useState(true)
     const handlerCloseModal = () =>{
         dispatch(setModalClose())
     }
+    
 
-    // if(state){
-    //     document.body.style.overflow="hidden"
-    // }
-    // else{
-    //     document.body.style.overflow="visible"
-    // }
-
-    console.log(data)
+    const onLoading = () =>{
+        setLoading(false)
+    }
     
     return (
         <div className={state ? "modal modal--active":"modal"} >
             <div className="modal__content" ref={modalContent}>
                     <div className="modal__header">
-                        <h2 className="modal__title">{data.title_english} {`(${data.title_japanese})`}</h2>
+                        <h2 className="modal__title" title={`(${data.title_japanese})`}>{data.title_english} {`(${data.title_japanese})`}</h2>
                         <button className="modal__btn" onClick={handlerCloseModal}>
                             <div className="modal__btn-line"></div>
                             <div className="modal__btn-line"></div>
@@ -40,7 +40,7 @@ function Modal({data}) {
                     </div>
                     <div className="modal__body">
                         <div className="modal__body-left">
-                            <img src={data.image_url} alt=""/>
+                            <img src={data.image_url} alt="" /> 
                         </div>
                         <div className="modal__body-right">
                            <ul className="modal__list">
@@ -166,12 +166,12 @@ function Modal({data}) {
                             }
                            {
                                data.trailer_url ? 
-                               <li className="modal__list-item list-item">Трейлер: <a href={data.trailer_url}><b>Ссылка</b></a></li> 
+                               <li className="modal__list-item list-item">Трейлер: <a href={data.trailer_url} target="_blank" rel="noreferrer"><b>Ссылка</b></a></li> 
                                :null
                            }
                             <li className="modal__list-item list-item">
                                 Описание:
-                                <p>
+                                <p className="list-item__text">
                                     {data.synopsis}
                                 </p>
                             </li>  

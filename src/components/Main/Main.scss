@@ -1,5 +1,5 @@
 .main {
-    flex-basis: 80%;
+    flex: 1 1 80%;
     padding: 20px;
 }
 
@@ -31,7 +31,7 @@
     justify-content: space-between;
     justify-content: center;
     text-align: center;
-    max-height: 1110px;
+    max-height: 500px;
     overflow-y: scroll;
     padding-right: 20px;
     &::-webkit-scrollbar-track {

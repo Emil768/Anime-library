@@ -18,6 +18,10 @@ function Sidebar({ topAnime }) {
     {
       name:"Манга",
       type:"manga"
+    },
+    {
+      name:"Видео",
+      type:"anime"
     }
   ]
 

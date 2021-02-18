@@ -3,6 +3,8 @@ import React,{useState,useEffect} from 'react';
 import Sidebar from "../Sidebar/Sidebar";
 import Main from "../Main/Main";
 
+import "./Content.scss"
+
 //redux
 import { setAnime } from "../../redux/actions/anime";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,12 +54,12 @@ function Content() {
   }, []);
     return (
         <div className="App__content">
-        <Sidebar topAnime={topAnime} />
-        <Main
-          search={search}
-          setSearch={setSearch}
-          HandleSearch={HandleSearch}
-        />
+          <Sidebar topAnime={topAnime} />
+          <Main
+            search={search}
+            setSearch={setSearch}
+            HandleSearch={HandleSearch}
+          />
       </div>
     )
 }

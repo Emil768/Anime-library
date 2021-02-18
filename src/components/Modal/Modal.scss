@@ -20,13 +20,16 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 20px;
+        position: relative;
     }
     &__title {
+        font-size: 20px;
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
         word-break: break-word;
+        padding-right: 20px;
     }
     &__content {
         z-index: 3;
@@ -57,23 +60,6 @@
             &:last-child {
                 margin-bottom: 0;
             }
-            p {
-                line-height: 1.5;
-                text-indent: 1.5rem;
-                max-height: 300px;
-                overflow-y: scroll;
-                padding-right: 20px;
-                &::-webkit-scrollbar-track {
-                    background: #d2d2d2;
-                }
-                &::-webkit-scrollbar {
-                    width: 4px;
-                }
-                &::-webkit-scrollbar-thumb {
-                    border-radius: 20px;
-                    background: rgba(70, 70, 70, 0.4);
-                }
-            }
         }
     }
     .list-item {
@@ -86,6 +72,23 @@
                 content: '';
             }
         }
+        &__text {
+            line-height: 1.5;
+            text-indent: 1.5rem;
+            max-height: 300px;
+            overflow-y: scroll;
+            padding-right: 20px;
+            &::-webkit-scrollbar-track {
+                background: #d2d2d2;
+            }
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 20px;
+                background: rgba(70, 70, 70, 0.4);
+            }
+        }
         &__year {
             margin-left: 5px;
             &:last-child {
@@ -94,6 +97,8 @@
         }
     }
     &__btn {
+        position: absolute;
+        right: 0px;
         width: 23px;
         background: transparent;
         outline: none;
@@ -108,15 +113,15 @@
             height: 3px;
             transition: .4s;
             &:first-child {
-                -webkit-transform: rotate(-45deg) translate(-5px, 8px);
-                transform: rotate(-45deg) translate(-5px, 8px);
+                -webkit-transform: rotate(-45deg) translate(-6px, 8px);
+                transform: rotate(-45deg) translate(-6px, 8px);
             }
             &:nth-child(2) {
                 opacity: 0;
             }
             &:last-child {
-                -webkit-transform: rotate(45deg) translate(-5px, -8px);
-                transform: rotate(45deg) translate(-5px, -8px);
+                -webkit-transform: rotate(45deg) translate(-4px, -7px);
+                transform: rotate(45deg) translate(-4px, -7px);
             }
         }
     }
