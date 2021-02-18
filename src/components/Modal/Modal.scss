@@ -52,6 +52,7 @@
         display: flex;
         &-right {
             margin-left: 20px;
+            flex: 1 1 100%;
         }
     }
     &__list {
@@ -122,6 +123,20 @@
             &:last-child {
                 -webkit-transform: rotate(45deg) translate(-4px, -7px);
                 transform: rotate(45deg) translate(-4px, -7px);
+            }
+        }
+    }
+    &__link {
+        &-watch {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            border: 1px solid #e7e7e7;
+            padding: 5px 10px;
+            margin-top: 10px;
+            &:hover {
+                border-color: #40b0ee;
+                color: #40b0ee;
             }
         }
     }

@@ -1,12 +1,9 @@
-import React,{useEffect, useRef,useState} from 'react'
+import React,{ useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as moment from "moment/moment";
 import "moment/locale/ru";
 import "./Modal.scss";
-
-
-import {ClipLoader} from "react-spinners";
 
 import {setModalClose} from "../../redux/actions/modal"
 
@@ -17,16 +14,13 @@ function Modal({data}) {
     const {state} = useSelector(state=>state.modal)
     const modalContent = useRef();
 
-    const [loading,setLoading] = useState(true)
     const handlerCloseModal = () =>{
         dispatch(setModalClose())
+        
     }
-    
 
-    const onLoading = () =>{
-        setLoading(false)
-    }
-    
+    const searchTitleAnime = data && data.title.replace(/[ ,:]/g, '_')
+
     return (
         <div className={state ? "modal modal--active":"modal"} >
             <div className="modal__content" ref={modalContent}>
@@ -40,7 +34,12 @@ function Modal({data}) {
                     </div>
                     <div className="modal__body">
                         <div className="modal__body-left">
-                            <img src={data.image_url} alt="" /> 
+                            <img src={data.image_url} alt="" />
+                            {
+                                data.type == "TV" ? 
+                                <a className="modal__link-watch" href={`https://myanimelist.net/anime/${data.mal_id}/${searchTitleAnime}/video`} target="_blank" rel="noreferrer">Смотреть</a>
+                                :  <a className="modal__link-watch" href={`https://myanimelist.net/manga/${data.mal_id}/${searchTitleAnime}`} target="_blank" rel="noreferrer">Читать</a>
+                            }
                         </div>
                         <div className="modal__body-right">
                            <ul className="modal__list">
@@ -52,9 +51,7 @@ function Modal({data}) {
                                <li className="modal__list-item list-item"> Год:  
                                <b>
                                    {
-                                       
                                        moment(data.aired.from).format('YYYY')
-                                    
                                    }
                                </b>
                            </li>
@@ -65,9 +62,7 @@ function Modal({data}) {
                                <li className="modal__list-item list-item"> С   
                                     <b className="list-item__year">
                                         {
-                                            
                                             moment(data.published.from).format('YYYY')
-                                            
                                         }
                                     </b>
                                       -  
@@ -136,7 +131,6 @@ function Modal({data}) {
                                        }
                                    </li>
                                    :null
-                                
                              }
                             {
 
