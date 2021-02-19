@@ -1,0 +1,95 @@
+.modal {
+  &__body {
+    display: flex;
+    justify-content: center;
+    &-right {
+      margin-left: 20px;
+      flex: 1 1 100%;
+    }
+  }
+  &__list {
+    &-item {
+      margin-bottom: 10px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .list-item {
+    &__genre,
+    &__producers {
+      &::after {
+        content: ",";
+      }
+      &:last-child::after {
+        content: "";
+      }
+    }
+    &__text {
+      line-height: 1.5;
+      text-indent: 1.5rem;
+      max-height: 300px;
+      overflow-y: scroll;
+      padding-right: 20px;
+      &::-webkit-scrollbar-track {
+        background: #d2d2d2;
+      }
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        background: rgba(70, 70, 70, 0.4);
+      }
+    }
+    &__year {
+      margin-left: 5px;
+      &:last-child {
+        margin-left: 0;
+      }
+    }
+  }
+  &__btn {
+    position: absolute;
+    right: 0px;
+    width: 23px;
+    background: transparent;
+    outline: none;
+    border: none;
+    display: block;
+    z-index: 3;
+    cursor: pointer;
+    &-line {
+      background: #2f3035;
+      border-radius: 3px;
+      margin-bottom: 6px;
+      height: 3px;
+      transition: 0.4s;
+      &:first-child {
+        -webkit-transform: rotate(-45deg) translate(-6px, 8px);
+        transform: rotate(-45deg) translate(-6px, 8px);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      &:last-child {
+        -webkit-transform: rotate(45deg) translate(-4px, -7px);
+        transform: rotate(45deg) translate(-4px, -7px);
+      }
+    }
+  }
+  &__link {
+    &-watch {
+      display: block;
+      width: 100%;
+      text-align: center;
+      border: 1px solid #e7e7e7;
+      padding: 5px 10px;
+      margin-top: 10px;
+      &:hover {
+        border-color: #40b0ee;
+        color: #40b0ee;
+      }
+    }
+  }
+}

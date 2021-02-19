@@ -1,183 +1,33 @@
-import React,{ useRef} from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import * as moment from "moment/moment";
-import "moment/locale/ru";
 import "./Modal.scss";
 
-import {setModalClose} from "../../redux/actions/modal"
+import { setModalClose } from "../../redux/actions/modal";
+import ModalFilter from "../ModalFilter/ModalFilter";
+import ModalInfo from "../ModalInfo/ModalInfo";
 
+function Modal({ data }) {
+  const dispatch = useDispatch();
 
-function Modal({data}) {
-    moment.locale("ru");
-    const dispatch = useDispatch();
-    const {state} = useSelector(state=>state.modal)
-    const modalContent = useRef();
+  const testState = useSelector(test => console.log(test));
+  const { state, type } = useSelector(state => state.modal);
 
-    const handlerCloseModal = () =>{
-        dispatch(setModalClose())
-        
-    }
+  const handlerCloseModal = () => {
+    dispatch(setModalClose(false, ""));
+  };
 
-    const searchTitleAnime = data && data.title.replace(/[ ,:]/g, '_')
+  return (
+    <div className={state ? "modal modal--active" : "modal"}>
+      {type === "filter" ? (
+        <ModalFilter closeModal={handlerCloseModal} />
+      ) : (
+        <ModalInfo data={data} closeModal={handlerCloseModal} />
+      )}
 
-    return (
-        <div className={state ? "modal modal--active":"modal"} >
-            <div className="modal__content" ref={modalContent}>
-                    <div className="modal__header">
-                        <h2 className="modal__title" title={`(${data.title_japanese})`}>{data.title_english} {`(${data.title_japanese})`}</h2>
-                        <button className="modal__btn" onClick={handlerCloseModal}>
-                            <div className="modal__btn-line"></div>
-                            <div className="modal__btn-line"></div>
-                            <div className="modal__btn-line"></div>
-                        </button>
-                    </div>
-                    <div className="modal__body">
-                        <div className="modal__body-left">
-                            <img src={data.image_url} alt="" />
-                            {
-                                data.type == "TV" ? 
-                                <a className="modal__link-watch" href={`https://myanimelist.net/anime/${data.mal_id}/${searchTitleAnime}/video`} target="_blank" rel="noreferrer">Смотреть</a>
-                                :  <a className="modal__link-watch" href={`https://myanimelist.net/manga/${data.mal_id}/${searchTitleAnime}`} target="_blank" rel="noreferrer">Читать</a>
-                            }
-                        </div>
-                        <div className="modal__body-right">
-                           <ul className="modal__list">
-                            <li className="modal__list-item list-item">Рейтинг: <b>{data.score} 🌟</b></li>
-                            <li className="modal__list-item list-item">Место: <b>{data.popularity}</b></li>
-                            <li className="modal__list-item list-item">Статус: <b>{data.status}</b></li>
-                           {
-                               data.aired ? 
-                               <li className="modal__list-item list-item"> Год:  
-                               <b>
-                                   {
-                                       moment(data.aired.from).format('YYYY')
-                                   }
-                               </b>
-                           </li>
-                           :null
-                           }
-                           {
-                               data.published ? 
-                               <li className="modal__list-item list-item"> С   
-                                    <b className="list-item__year">
-                                        {
-                                            moment(data.published.from).format('YYYY')
-                                        }
-                                    </b>
-                                      -  
-                                    <b className="list-item__year">
-                                        {
-                                        data.published.to ?
-                                            moment(data.published.to).format('YYYY')
-                                        : "настоящее время"}
-                                    </b>
-                                </li>
-                           :null
-                           }
-                            {
-                                data.sourse ? 
-                                <li className="modal__list-item list-item">Источник:  
-                                    <b>{data.sourse}
-                                    </b>
-                                </li> 
-                                :null
-                            }
-                            {
-                                data.type === "TV" ? 
-                                <li className="modal__list-item list-item">Возрастной рейтинг:  
-                                    <b>{data.rating}
-                                    </b>
-                                </li> 
-                                : null
-                            }
-                           
-                            {
-                                data.genres ? 
-                                <li className="modal__list-item ">Жанры:
-                                {
-                                      data.genres.map((item,index)=>{
-                                         return(
-                                          <b className="list-item__genre" key={index}> {item.name}</b>
-                                         )
-                                      })
-                                  } 
-                              </li>
-                              :null
-                            }
-                             {
-                                 data.authors ? 
-                                 <li className="modal__list-item list-item">Авторы :
-                                    {
-                                        data.authors.map((item,index)=>{
-                                            return(
-                                                <b key={index}>{item.name}</b>
-                                            )
-                                        })
-                                    }
-                                </li>
-                                :null
-                             }
-                             
-                             {
-                                 data.producers ? 
-                                    <li className="modal__list-item list-item ">Авторы :
-                                       {
-                                            data.producers.map((item,index)=>{
-                                               return(
-                                                   <b className="list-item__producers " key={index}>{item.name}</b>
-                                               )
-                                            })
-                                       }
-                                   </li>
-                                   :null
-                             }
-                            {
-
-                                data.episodes ? 
-                                <li className="modal__list-item list-item">Серий: <b>{data.episodes}</b></li>
-                                :null
-                            }
-
-                            {
-                                data.studios ?  
-                                <li className="modal__list-item list-item">Студия:
-                                {
-                                    data.studios.length ? 
-                                    data.studios.map((item,index)=>{
-                                        return(
-                                            <b className="list-item__studio" key={index}>
-                                                {item.name}
-                                            </b>
-                                        )
-                                    })
-                                    :
-                                    <b>Неизвестно</b>
-                                }  
-                                </li>
-                                :
-                                null    
-                            }
-                           {
-                               data.trailer_url ? 
-                               <li className="modal__list-item list-item">Трейлер: <a href={data.trailer_url} target="_blank" rel="noreferrer"><b>Ссылка</b></a></li> 
-                               :null
-                           }
-                            <li className="modal__list-item list-item">
-                                Описание:
-                                <p className="list-item__text">
-                                    {data.synopsis}
-                                </p>
-                            </li>  
-                           </ul>
-                          
-                        </div>
-                    </div>
-                    <div className="modal__footer"></div>
-                </div>
-                <div className="modal__overside" onClick={handlerCloseModal}></div>
-        </div>
-    )
+      <div className="modal__overside" onClick={handlerCloseModal}></div>
+    </div>
+  );
 }
 
-export default Modal
+export default Modal;

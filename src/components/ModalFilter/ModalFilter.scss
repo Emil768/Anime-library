@@ -1,0 +1,34 @@
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  &__item {
+    margin-bottom: 20px;
+
+    label {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    input {
+      background-color: hsl(0, 0%, 100%);
+      border-color: hsl(0, 0%, 80%);
+      border-radius: 4px;
+      border-style: solid;
+      border-width: 1px;
+      outline: none;
+      min-height: 38px;
+      padding: 2px 8px;
+      margin-right: 10px;
+      font-family: "Roboto", sans-serif;
+      &:last-child {
+        margin-right: 0;
+      }
+      &:focus {
+        border-color: #2684ff;
+        box-shadow: 0 0 0 1px #2684ff;
+      }
+    }
+    .css-g1d714-ValueContainer {
+      max-width: 290px;
+    }
+  }
+}

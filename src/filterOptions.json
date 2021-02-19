@@ -1,0 +1,60 @@
+{
+  "genreOptions": [
+    { "value": "action", "label": "Экшен" },
+    { "value": "adventure", "label": "Приключения" },
+    { "value": "cars", "label": "Машины" },
+    { "value": "comedy", "label": "Комедия" },
+    { "value": "demons", "label": "Демоны" },
+    { "value": "mystery", "label": "Мистика" },
+    { "value": "drama", "label": "Драма" },
+    { "value": "ecchi", "label": "Этти" },
+    { "value": "fantasy", "label": "Фэнтези" },
+    { "value": "game", "label": "Игра" },
+    { "value": "hentai", "label": "Hentai" }
+  ],
+
+  "typeOptions": [
+    { "value": "tv", "label": "TV" },
+    { "value": "ova", "label": "OVA" },
+    { "value": "movie", "label": "Фильм" },
+    { "value": "special", "label": "Special" },
+    { "value": "ona", "label": "ONA" },
+    { "value": "music", "label": "Музыка" },
+    { "value": "drama", "label": "Драма" },
+    { "value": "ecchi", "label": "Этти" },
+    { "value": "fantasy", "label": "Фэнтези" },
+    { "value": "game", "label": "Игра" },
+    { "value": "hentai", "label": "Hentai" }
+  ],
+
+  "statusOptions": [
+    { "value": "airing", "label": "Вышел" },
+    { "value": "completed", "label": "Завершен" },
+    { "value": "to_be_aired", "label": "Выйдет" },
+    { "value": "tba", "label": "Онгоинг" },
+    { "value": "upcoming", "label": "Анонс" }
+  ],
+
+  "yearOptions": [
+    { "value": "g", "label": "G - для всех возрастов" },
+    { "value": "pg", "label": "PG - Дети" },
+    { "value": "pg13", "label": "PG-13 - Подростки от 13 лет и старше" },
+    {
+      "value": "r17",
+      "label": "R - рекомендуется 17+ (насилие и ненормативная лексика)"
+    },
+    {
+      "value": "r",
+      "label": "R + - умеренная нагота (также может содержать насилие и ненормативную лексику)"
+    },
+    {
+      "value": "rx",
+      "label": "Rx - хентай (экстремальное сексуальное содержание / нагота)"
+    }
+  ],
+
+  "sortOptions": [
+    { "value": "asc", "label": "По возрастанию" },
+    { "value": "desc", "label": "По убыванию" }
+  ]
+}

@@ -1,18 +1,22 @@
 .sidebar {
-    border-right: 1px solid #e7e7e7;
-    padding: 20px;
-    flex: 1 1 250px;
-    &__title {
-        margin-bottom: 10px;
+  border-right: 1px solid #e7e7e7;
+  padding: 20px;
+  flex: 1 1 250px;
+  &__title {
+    margin-bottom: 10px;
+  }
+  &__item {
+    margin-bottom: 10px;
+    padding: 8px 20px;
+    border: 1px solid #e7e7e78a;
+    &:hover {
+      cursor: pointer;
+      border-color: #40b0ee;
+      color: #40b0ee;
     }
-    &__item {
-        margin-bottom: 10px;
-        padding: 8px 20px;
-        border: 1px solid #e7e7e78a;
-        &:hover {
-            cursor: pointer;
-            border-color: #40b0ee;
-            color: #40b0ee;
-        }
+    &--active {
+      border-color: #40b0ee;
+      color: #40b0ee;
     }
+  }
 }

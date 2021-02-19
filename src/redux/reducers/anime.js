@@ -1,7 +1,7 @@
 let initialState = {
   isLoaded: false,
   items: [],
-  type:""
+  type: "",
 };
 
 let anime = (state = initialState, action) => {
@@ -10,15 +10,15 @@ let anime = (state = initialState, action) => {
       return {
         ...state,
         items: action.payload.items,
-        type:action.payload.type,
+        type: action.payload.type,
         isLoaded: true,
       };
 
-      case "SET_MANGA":
+    case "SET_MANGA":
       return {
         ...state,
         items: action.payload,
-        type:action.type,
+        type: action.type,
         isLoaded: true,
       };
     case "SET_LOADED":
