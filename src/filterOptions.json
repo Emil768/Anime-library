@@ -1,16 +1,16 @@
 {
   "genreOptions": [
-    { "value": "action", "label": "Экшен" },
-    { "value": "adventure", "label": "Приключения" },
-    { "value": "cars", "label": "Машины" },
-    { "value": "comedy", "label": "Комедия" },
-    { "value": "demons", "label": "Демоны" },
-    { "value": "mystery", "label": "Мистика" },
-    { "value": "drama", "label": "Драма" },
-    { "value": "ecchi", "label": "Этти" },
-    { "value": "fantasy", "label": "Фэнтези" },
-    { "value": "game", "label": "Игра" },
-    { "value": "hentai", "label": "Hentai" }
+    { "value": "1", "label": "Экшен" },
+    { "value": "2", "label": "Приключения" },
+    { "value": "3", "label": "Машины" },
+    { "value": "4", "label": "Комедия" },
+    { "value": "5", "label": "Демоны" },
+    { "value": "7", "label": "Мистика" },
+    { "value": "8", "label": "Драма" },
+    { "value": "9", "label": "Этти" },
+    { "value": "10", "label": "Фэнтези" },
+    { "value": "11", "label": "Игра" },
+    { "value": "12", "label": "Hentai" }
   ],
 
   "typeOptions": [
@@ -35,7 +35,7 @@
     { "value": "upcoming", "label": "Анонс" }
   ],
 
-  "yearOptions": [
+  "ratingOptions": [
     { "value": "g", "label": "G - для всех возрастов" },
     { "value": "pg", "label": "PG - Дети" },
     { "value": "pg13", "label": "PG-13 - Подростки от 13 лет и старше" },
@@ -51,6 +51,16 @@
       "value": "rx",
       "label": "Rx - хентай (экстремальное сексуальное содержание / нагота)"
     }
+  ],
+
+  "orderOptions": [
+    { "value": "title", "label": "По названию" },
+    { "value": "start_date", "label": "По начальной дате" },
+    { "value": "end_date", "label": "По последней дате" },
+    { "value": "score", "label": "По рейтингу" },
+    { "value": "type", "label": "По типу" },
+    { "value": "episodes", "label": "По эпизодам" },
+    { "value": "rating", "label": "По возрастному рейтингу" }
   ],
 
   "sortOptions": [

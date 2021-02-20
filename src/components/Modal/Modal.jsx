@@ -10,7 +10,7 @@ import ModalInfo from "../ModalInfo/ModalInfo";
 function Modal({ data }) {
   const dispatch = useDispatch();
 
-  const testState = useSelector(test => console.log(test));
+  // const testState = useSelector(test => console.log(test));
   const { state, type } = useSelector(state => state.modal);
 
   const handlerCloseModal = () => {

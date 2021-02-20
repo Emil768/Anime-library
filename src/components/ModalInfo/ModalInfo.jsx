@@ -29,16 +29,7 @@ function ModalInfo({ data, closeModal }) {
       <div className="modal__body">
         <div className="modal__body-left">
           <img src={data.image_url} alt="" />
-          {data.type == "TV" ? (
-            <a
-              className="modal__link-watch"
-              href={`https://myanimelist.net/anime/${data.mal_id}/${searchTitleAnime}/video`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Смотреть
-            </a>
-          ) : (
+          {data.type === "Manga" ? (
             <a
               className="modal__link-watch"
               href={`https://myanimelist.net/manga/${data.mal_id}/${searchTitleAnime}`}
@@ -46,6 +37,15 @@ function ModalInfo({ data, closeModal }) {
               rel="noreferrer"
             >
               Читать
+            </a>
+          ) : (
+            <a
+              className="modal__link-watch"
+              href={`https://myanimelist.net/anime/${data.mal_id}/${searchTitleAnime}/video`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Смотреть
             </a>
           )}
         </div>
@@ -151,6 +151,9 @@ function ModalInfo({ data, closeModal }) {
                 )}
               </li>
             ) : null}
+            <li className="modal__list-item list-item">
+              Тип: <b>{data.type}</b>
+            </li>
             {data.trailer_url ? (
               <li className="modal__list-item list-item">
                 Трейлер:{" "}

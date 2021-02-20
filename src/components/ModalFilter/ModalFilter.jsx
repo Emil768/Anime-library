@@ -5,27 +5,44 @@ import "./ModalFilter.scss";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import "react-day-picker/lib/style.css";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+import * as moment from "moment/moment";
+import "moment/locale/ru";
+
 import {
   genreOptions,
   typeOptions,
   statusOptions,
-  yearOptions,
+  ratingOptions,
+  orderOptions,
   sortOptions,
 } from "../../filterOptions.json";
 
+import { setAnime } from "../../redux/actions/anime";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
 function ModalFilter({ closeModal }) {
+  const dispatch = useDispatch();
+  moment.locale("ru");
   const handlerCloseModal = () => {
     closeModal();
   };
 
   const animatedComponents = makeAnimated();
 
-  const [genreValue, setGenreValue] = useState("");
+  const [genreValue, setGenreValue] = useState([]);
   const [typeValue, setTypeValue] = useState("");
   const [statusValue, setStatusValue] = useState("");
   const [startDateValue, setStartDateValue] = useState("");
   const [endDateValue, setEndDateValue] = useState("");
-  const [yearValue, setYearValue] = useState("");
+  const [ratingValue, setRatingValue] = useState("");
+  const [orderValue, setOrderValue] = useState("");
   const [sortValue, setSortValue] = useState("");
 
   const handleChangeGenre = genre => {
@@ -41,14 +58,58 @@ function ModalFilter({ closeModal }) {
     setStartDateValue(startDate);
   };
   const handleChangeEndDate = endDate => {
+    console.log(endDate);
     setEndDateValue(endDate);
   };
-  const handleChangeYear = year => {
-    setYearValue(year);
+  const handleChangeRating = rating => {
+    setRatingValue(rating);
+  };
+  const handleChangeOrder = order => {
+    setOrderValue(order);
   };
   const handleChangeSort = sort => {
     setSortValue(sort);
   };
+
+  console.log(genreValue, statusValue, typeValue, orderValue, sortValue);
+
+  const handlerSearchQuery = () => {
+    // axios
+    //   .get(
+    //     `https://api.jikan.moe/v3/search/anime?q&type=${typeValue.value}&status=${statusValue.value}&rating=${ratingValue.value}&order_by=score&sort=${sortValue.value}`
+    //   )
+    //   .then(res => console.log(res.data.results));
+
+    axios
+      .get(
+        `https://api.jikan.moe/v3/search/anime?q=&page=1
+        ${genreValue.length ? `&genre=${genreValue[0].value}` : ""}
+        ${typeValue.value ? `&type=${typeValue.value}` : ""}
+        ${statusValue.value ? `&status=${statusValue.value}` : ""}
+        ${ratingValue.value ? `&rating=${ratingValue.value}` : ""}
+        ${startDateValue ? `&start_date=${startDateValue}` : ""}
+        ${endDateValue ? `&end_date=${endDateValue}` : ""}
+        ${orderValue.value ? `&order_by=${orderValue.value}` : ""}
+        ${sortValue.value ? `&sort=${sortValue.value}` : ""}
+        `
+      )
+      .then(res => dispatch(setAnime(res.data.results, "anime")));
+
+    console.log(`https://api.jikan.moe/v3/search/anime?q=&page=1${
+      genreValue.length ? `&genre=${genreValue[0].value}` : ""
+    }
+      ${typeValue.value ? `&type=${typeValue.value}` : ""}
+      ${statusValue.value ? `&status=${statusValue.value}` : ""}
+      ${ratingValue.value ? `&rating=${ratingValue.value}` : ""}
+      ${startDateValue ? `&start_date=${startDateValue}` : ""}
+      ${endDateValue ? `&end_date=${endDateValue}` : ""}
+      ${orderValue.value ? `&order_by=${orderValue.value}` : ""}
+      ${sortValue.value ? `&sort=${sortValue.value}` : ""}
+    
+      `);
+  };
+
+  console.log(endDateValue);
 
   return (
     <div className="modal__content modal__filter">
@@ -73,6 +134,7 @@ function ModalFilter({ closeModal }) {
               closeMenuOnSelect={false}
               styles={{ width: "100px" }}
               placeholder="По каким жанрам искать"
+              isSearchable={false}
             />
           </li>
           <li className="filter-list__item">
@@ -82,6 +144,7 @@ function ModalFilter({ closeModal }) {
               onChange={handleChangeType}
               options={typeOptions}
               placeholder="Какой тип аниме искать"
+              isSearchable={false}
             />
           </li>
           <li className="filter-list__item">
@@ -91,30 +154,42 @@ function ModalFilter({ closeModal }) {
               onChange={handleChangeStatus}
               options={statusOptions}
               placeholder="Какой статус аниме"
+              isSearchable={false}
             />
           </li>
           <li className="filter-list__item">
             <label>Год</label>
             <div className="">
-              <input
-                type="text"
+              <DayPickerInput
+                onDayChange={day => handleChangeStartDate(moment(day).format())}
                 placeholder="От"
-                onChange={e => handleChangeStartDate(e.target.value)}
+                format="YYYY-MM-dd"
               />
-              <input
-                type="text"
-                placeholder="До"
-                onChange={e => handleChangeEndDate(e.target.value)}
+              <DayPickerInput
+                onDayChange={day => handleChangeEndDate(moment(day).format())}
+                placeholder="От"
+                format="YYYY-MM-dd"
               />
             </div>
           </li>
           <li className="filter-list__item">
             <label>Возрастной рейтинг</label>
             <Select
-              value={yearValue}
-              onChange={handleChangeYear}
-              options={yearOptions}
+              value={ratingValue}
+              onChange={handleChangeRating}
+              options={ratingOptions}
               placeholder="Какой возрастной рейтинг выбрать"
+              isSearchable={false}
+            />
+          </li>
+          <li className="filter-list__item">
+            <label>Последовательность по</label>
+            <Select
+              value={orderValue}
+              onChange={handleChangeOrder}
+              options={orderOptions}
+              placeholder="Какую последовательность выбрать"
+              isSearchable={false}
             />
           </li>
           <li className="filter-list__item">
@@ -124,7 +199,13 @@ function ModalFilter({ closeModal }) {
               onChange={handleChangeSort}
               options={sortOptions}
               placeholder="Сортировка"
+              isSearchable={false}
             />
+          </li>
+          <li className="filter-list__item">
+            <button className="modal__filter-btn" onClick={handlerSearchQuery}>
+              Искать
+            </button>
           </li>
         </ul>
       </div>
