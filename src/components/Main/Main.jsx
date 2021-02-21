@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./Main.scss";
 
 import AnimeCard from "../AnimeCard/AnimeCard";
+import Loader from "../AnimeCard/AnimeCardLoader";
 import emptyGif from "../../img/anime-empty.gif";
 import { IoSettingsOutline } from "react-icons/io5";
 
@@ -19,6 +20,8 @@ function Main({ HandleSearch, setSearch, search }) {
   const dispatch = useDispatch();
   const { items, type } = useSelector(state => state.anime);
   const [cardInfo, setCardInfo] = useState("");
+
+  const { isLoaded } = useSelector(state => state.anime);
 
   const handlerAnimeInfo = id => {
     getInfoAnime(id);
@@ -45,30 +48,41 @@ function Main({ HandleSearch, setSearch, search }) {
           value={search}
           onChange={e => setSearch(e.target.value)}
           minLength={3}
+          maxLength={40}
           required
         />
       </form>
       <div className="main__panel">
         <h3>Найдено результатов: {`(${items.length})`}</h3>
         <button className="main__panel-filter" onClick={handlerFilterInfo}>
-          <span>Фильтр аниме</span>
+          <span>Фильтр</span>
           <IoSettingsOutline size={20} />
         </button>
       </div>
-      <ul className="anime-list">
+      <ul
+        className={items.length ? "anime-list" : "anime-list anime-list--empty"}
+      >
         {items.length ? (
-          items.map(anime => {
-            return (
-              <AnimeCard
-                key={anime.mal_id}
-                {...anime}
-                handlerInfo={handlerAnimeInfo}
-              />
-            );
-          })
+          isLoaded ? (
+            items.map(anime => {
+              return (
+                <AnimeCard
+                  key={anime.mal_id}
+                  {...anime}
+                  handlerInfo={handlerAnimeInfo}
+                />
+              );
+            })
+          ) : (
+            Array(items.length)
+              .fill(0)
+              .map((_, index) => <Loader key={index} />)
+          )
         ) : (
-          <li>
-            <h3>Аниме по такому названию не найдены😟</h3>
+          <li className="anime-empty">
+            <h2 className="anime-empty__title">
+              Аниме по названию "{search}" не найдены😟
+            </h2>
             <figure>
               <img src={emptyGif} alt="" />
             </figure>

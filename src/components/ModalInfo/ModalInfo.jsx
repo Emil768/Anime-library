@@ -18,7 +18,8 @@ function ModalInfo({ data, closeModal }) {
     <div className="modal__content">
       <div className="modal__header">
         <h2 className="modal__title" title={`(${data.title_japanese})`}>
-          {data.title_english} {`(${data.title_japanese})`}
+          {data.title_english ? data.title_english : data.title}{" "}
+          {`(${data.title_japanese})`}
         </h2>
         <button className="modal__btn" onClick={handlerCloseModal}>
           <div className="modal__btn-line"></div>
@@ -64,7 +65,12 @@ function ModalInfo({ data, closeModal }) {
               <li className="modal__list-item list-item">
                 {" "}
                 Год:
-                <b>{moment(data.aired.from).format("YYYY")}</b>
+                <b>{moment(data.aired.from).format("L")}</b>
+                {data.aired.to !== null ? (
+                  <b>-{moment(data.aired.to).format("L")}</b>
+                ) : (
+                  ""
+                )}
               </li>
             ) : null}
             {data.published ? (
@@ -72,12 +78,12 @@ function ModalInfo({ data, closeModal }) {
                 {" "}
                 С
                 <b className="list-item__year">
-                  {moment(data.published.from).format("YYYY")}
+                  {moment(data.published.from).format("L")}
                 </b>
                 -
                 <b className="list-item__year">
                   {data.published.to
-                    ? moment(data.published.to).format("YYYY")
+                    ? moment(data.published.to).format("L")
                     : "настоящее время"}
                 </b>
               </li>

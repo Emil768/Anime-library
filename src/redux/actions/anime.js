@@ -5,3 +5,8 @@ export let setAnime = (items, type) => ({
     type,
   },
 });
+
+export let setLoaded = payload => ({
+  type: "SET_LOADED",
+  payload,
+});

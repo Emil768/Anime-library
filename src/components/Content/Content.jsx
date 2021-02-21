@@ -6,7 +6,7 @@ import Main from "../Main/Main";
 import "./Content.scss";
 
 //redux
-import { setAnime } from "../../redux/actions/anime";
+import { setAnime, setLoaded } from "../../redux/actions/anime";
 import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
@@ -20,6 +20,7 @@ function Content() {
   const [search, setSearch] = useState("");
 
   const GetTopAnime = () => {
+    dispatch(setLoaded(false));
     axios
       .get(`https://api.jikan.moe/v3/top/anime/1/bypopularity`)
       .then(res => dispatch(setAnime(res.data.top, "anime")));
@@ -31,6 +32,7 @@ function Content() {
   };
 
   const FetchAnime = (query, type) => {
+    dispatch(setLoaded(false));
     axios
       .get(
         `https://api.jikan.moe/v3/search/${type}?q=${query}&order_by=title&sort=asc`

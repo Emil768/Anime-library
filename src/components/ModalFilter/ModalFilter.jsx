@@ -8,9 +8,6 @@ import makeAnimated from "react-select/animated";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
 import * as moment from "moment/moment";
 import "moment/locale/ru";
 
@@ -23,13 +20,18 @@ import {
   sortOptions,
 } from "../../filterOptions.json";
 
-import { setAnime } from "../../redux/actions/anime";
-import { useDispatch } from "react-redux";
+import { setAnime, setLoaded } from "../../redux/actions/anime";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 function ModalFilter({ closeModal }) {
   const dispatch = useDispatch();
   moment.locale("ru");
+
+  const { type } = useSelector(state => state.anime);
+
+  console.log(type);
+
   const handlerCloseModal = () => {
     closeModal();
   };
@@ -71,19 +73,16 @@ function ModalFilter({ closeModal }) {
     setSortValue(sort);
   };
 
-  console.log(genreValue, statusValue, typeValue, orderValue, sortValue);
-
   const handlerSearchQuery = () => {
-    // axios
-    //   .get(
-    //     `https://api.jikan.moe/v3/search/anime?q&type=${typeValue.value}&status=${statusValue.value}&rating=${ratingValue.value}&order_by=score&sort=${sortValue.value}`
-    //   )
-    //   .then(res => console.log(res.data.results));
-
+    dispatch(setLoaded(false));
     axios
       .get(
-        `https://api.jikan.moe/v3/search/anime?q=&page=1
-        ${genreValue.length ? `&genre=${genreValue[0].value}` : ""}
+        `https://api.jikan.moe/v3/search/${type}?
+        ${
+          genreValue.length
+            ? `&genre=${genreValue.map(item => item.value).join(",")}`
+            : ""
+        }
         ${typeValue.value ? `&type=${typeValue.value}` : ""}
         ${statusValue.value ? `&status=${statusValue.value}` : ""}
         ${ratingValue.value ? `&rating=${ratingValue.value}` : ""}
@@ -91,30 +90,34 @@ function ModalFilter({ closeModal }) {
         ${endDateValue ? `&end_date=${endDateValue}` : ""}
         ${orderValue.value ? `&order_by=${orderValue.value}` : ""}
         ${sortValue.value ? `&sort=${sortValue.value}` : ""}
-        `
+        &page=1
+        `.trim()
       )
-      .then(res => dispatch(setAnime(res.data.results, "anime")));
+      .then(res => dispatch(setAnime(res.data.results, type)));
 
-    console.log(`https://api.jikan.moe/v3/search/anime?q=&page=1${
-      genreValue.length ? `&genre=${genreValue[0].value}` : ""
+    console.log(
+      `https://api.jikan.moe/v3/search/anime?
+    ${
+      genreValue.length
+        ? `&genre=${genreValue.map(item => item.value).join(",")}`
+        : ""
     }
-      ${typeValue.value ? `&type=${typeValue.value}` : ""}
-      ${statusValue.value ? `&status=${statusValue.value}` : ""}
-      ${ratingValue.value ? `&rating=${ratingValue.value}` : ""}
-      ${startDateValue ? `&start_date=${startDateValue}` : ""}
-      ${endDateValue ? `&end_date=${endDateValue}` : ""}
-      ${orderValue.value ? `&order_by=${orderValue.value}` : ""}
-      ${sortValue.value ? `&sort=${sortValue.value}` : ""}
-    
-      `);
+    ${typeValue.value ? `&type=${typeValue.value}` : ""}
+    ${statusValue.value ? `&status=${statusValue.value}` : ""}
+    ${ratingValue.value ? `&rating=${ratingValue.value}` : ""}
+    ${startDateValue ? `&start_date=${startDateValue}` : ""}
+    ${endDateValue ? `&end_date=${endDateValue}` : ""}
+    ${orderValue.value ? `&order_by=${orderValue.value}` : ""}
+    ${sortValue.value ? `&sort=${sortValue.value}` : ""}
+    &page=1
+    `.trim()
+    );
   };
-
-  console.log(endDateValue);
 
   return (
     <div className="modal__content modal__filter">
       <div className="modal__header">
-        <h2 className="modal__title">Фильтр аниме</h2>
+        <h2 className="modal__title">Фильтр</h2>
         <button className="modal__btn" onClick={handlerCloseModal}>
           <div className="modal__btn-line"></div>
           <div className="modal__btn-line"></div>
