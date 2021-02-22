@@ -13,13 +13,18 @@ import {
   setModalActive,
   setModalFilterActive,
 } from "../../redux/actions/modal";
+
+import { setAnime, setLoaded } from "../../redux/actions/anime";
 import axios from "axios";
 import Modal from "../Modal/Modal";
 
-function Main({ HandleSearch, setSearch, search }) {
+import MainTopPopup from "../MainTopPopup/MainTopPopup";
+
+function Main() {
   const dispatch = useDispatch();
   const { items, type } = useSelector(state => state.anime);
   const [cardInfo, setCardInfo] = useState("");
+  const [search, setSearch] = useState("");
 
   const { isLoaded } = useSelector(state => state.anime);
 
@@ -38,12 +43,28 @@ function Main({ HandleSearch, setSearch, search }) {
       .then(res => setCardInfo(res.data));
   };
 
+  const HandleSearch = e => {
+    e.preventDefault();
+    FetchAnime(search, type);
+  };
+
+  const FetchAnime = (query, type) => {
+    dispatch(setLoaded(false));
+    axios
+      .get(
+        `https://api.jikan.moe/v3/search/${type}?q=${query}&order_by=title&sort=asc`
+      )
+      .then(res => dispatch(setAnime(res.data.results, type)));
+  };
+
+  console.log("rerender content");
+
   return (
     <main className="main">
       <form className="search-box" onSubmit={HandleSearch}>
         <input
           className="search-box__input"
-          type="search"
+          type="text"
           placeholder="Поиск"
           value={search}
           onChange={e => setSearch(e.target.value)}
@@ -59,6 +80,9 @@ function Main({ HandleSearch, setSearch, search }) {
           <IoSettingsOutline size={20} />
         </button>
       </div>
+
+      <MainTopPopup />
+
       <ul
         className={items.length ? "anime-list" : "anime-list anime-list--empty"}
       >

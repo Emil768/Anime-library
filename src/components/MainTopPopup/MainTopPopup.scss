@@ -1,0 +1,45 @@
+.main__top {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 20px;
+  &-popup {
+    position: absolute;
+    left: 21px;
+    top: 13px;
+    margin-top: 15px;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px 0;
+    width: 160px;
+  }
+  &-list {
+    &--hide {
+      display: none;
+    }
+  }
+
+  &-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    &:hover {
+      background: #40b0ee26;
+      color: #40b0ee;
+    }
+    &--active {
+      background: #40b0ee26;
+      color: #40b0ee;
+    }
+  }
+
+  &-btn {
+    position: absolute;
+    top: 2px;
+    left: 35px;
+    cursor: pointer;
+    &--active svg {
+      transform: rotate(180deg);
+    }
+  }
+}

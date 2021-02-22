@@ -17,7 +17,6 @@ import {
   statusOptions,
   ratingOptions,
   orderOptions,
-  sortOptions,
 } from "../../filterOptions.json";
 
 import { setAnime, setLoaded } from "../../redux/actions/anime";
@@ -29,8 +28,6 @@ function ModalFilter({ closeModal }) {
   moment.locale("ru");
 
   const { type } = useSelector(state => state.anime);
-
-  console.log(type);
 
   const handlerCloseModal = () => {
     closeModal();
@@ -44,7 +41,7 @@ function ModalFilter({ closeModal }) {
   const [startDateValue, setStartDateValue] = useState("");
   const [endDateValue, setEndDateValue] = useState("");
   const [ratingValue, setRatingValue] = useState("");
-  const [orderValue, setOrderValue] = useState("");
+  const [orderValue, setOrderValue] = useState(orderOptions[3]);
   const [sortValue, setSortValue] = useState("");
 
   const handleChangeGenre = genre => {
@@ -69,9 +66,8 @@ function ModalFilter({ closeModal }) {
   const handleChangeOrder = order => {
     setOrderValue(order);
   };
-  const handleChangeSort = sort => {
-    setSortValue(sort);
-  };
+
+  const numbers = Array.from(Array(20), () => 0);
 
   const handlerSearchQuery = () => {
     dispatch(setLoaded(false));
@@ -89,30 +85,12 @@ function ModalFilter({ closeModal }) {
         ${startDateValue ? `&start_date=${startDateValue}` : ""}
         ${endDateValue ? `&end_date=${endDateValue}` : ""}
         ${orderValue.value ? `&order_by=${orderValue.value}` : ""}
-        ${sortValue.value ? `&sort=${sortValue.value}` : ""}
-        &page=1
         `.trim()
       )
       .then(res => dispatch(setAnime(res.data.results, type)));
-
-    console.log(
-      `https://api.jikan.moe/v3/search/anime?
-    ${
-      genreValue.length
-        ? `&genre=${genreValue.map(item => item.value).join(",")}`
-        : ""
-    }
-    ${typeValue.value ? `&type=${typeValue.value}` : ""}
-    ${statusValue.value ? `&status=${statusValue.value}` : ""}
-    ${ratingValue.value ? `&rating=${ratingValue.value}` : ""}
-    ${startDateValue ? `&start_date=${startDateValue}` : ""}
-    ${endDateValue ? `&end_date=${endDateValue}` : ""}
-    ${orderValue.value ? `&order_by=${orderValue.value}` : ""}
-    ${sortValue.value ? `&sort=${sortValue.value}` : ""}
-    &page=1
-    `.trim()
-    );
   };
+
+  console.log(orderOptions[3].value);
 
   return (
     <div className="modal__content modal__filter">
@@ -186,24 +164,17 @@ function ModalFilter({ closeModal }) {
             />
           </li>
           <li className="filter-list__item">
-            <label>Последовательность по</label>
+            <label>Сортировать по</label>
             <Select
               value={orderValue}
               onChange={handleChangeOrder}
               options={orderOptions}
-              placeholder="Какую последовательность выбрать"
+              placeholder="Сортировать как"
               isSearchable={false}
             />
           </li>
           <li className="filter-list__item">
             <label>Сортировать по</label>
-            <Select
-              value={sortValue}
-              onChange={handleChangeSort}
-              options={sortOptions}
-              placeholder="Сортировка"
-              isSearchable={false}
-            />
           </li>
           <li className="filter-list__item">
             <button className="modal__filter-btn" onClick={handlerSearchQuery}>

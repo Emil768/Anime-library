@@ -10,7 +10,19 @@
     { "value": "9", "label": "Этти" },
     { "value": "10", "label": "Фэнтези" },
     { "value": "11", "label": "Игра" },
-    { "value": "12", "label": "Hentai" }
+    { "value": "14", "label": "Ужасы" },
+    { "value": "16", "label": "Магия" },
+    { "value": "18", "label": "Меха" },
+    { "value": "22", "label": "Романтика" },
+    { "value": "24", "label": "Научная фантастика" },
+    { "value": "30", "label": "Спорт" },
+    { "value": "31", "label": "Суперспособности" },
+    { "value": "32", "label": "Вампиры" },
+    { "value": "35", "label": "Гарем" },
+    { "value": "36", "label": "Повседневность" },
+    { "value": "38", "label": "Военное" },
+    { "value": "40", "label": "Психология" },
+    { "value": "42", "label": "Сёнен" }
   ],
 
   "typeOptions": [

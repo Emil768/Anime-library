@@ -10,14 +10,9 @@ import { setAnime, setLoaded } from "../../redux/actions/anime";
 import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
-import anime from "../../redux/reducers/anime";
 
 function Content() {
   const dispatch = useDispatch();
-  const { type } = useSelector(state => state.anime);
-
-  const [topAnime, setTopAnime] = useState([]);
-  const [search, setSearch] = useState("");
 
   const GetTopAnime = () => {
     dispatch(setLoaded(false));
@@ -26,36 +21,14 @@ function Content() {
       .then(res => dispatch(setAnime(res.data.top, "anime")));
   };
 
-  const HandleSearch = e => {
-    e.preventDefault();
-    FetchAnime(search, type);
-  };
-
-  const FetchAnime = (query, type) => {
-    dispatch(setLoaded(false));
-    axios
-      .get(
-        `https://api.jikan.moe/v3/search/${type}?q=${query}&order_by=title&sort=asc`
-      )
-      .then(res => dispatch(setAnime(res.data.results, type)));
-  };
-
-  const testCheck = query => {
-    axios
-      .get(`https://api.jikan.moe/v3/anime/1/stats`)
-      .then(res => console.log(res.data));
-
-    // setVideos(temp.episodes);
-  };
-
   useEffect(() => {
     GetTopAnime();
-    // testCheck()
   }, []);
+
   return (
     <div className="App__content">
-      <Sidebar topAnime={topAnime} />
-      <Main search={search} setSearch={setSearch} HandleSearch={HandleSearch} />
+      <Sidebar />
+      <Main />
     </div>
   );
 }

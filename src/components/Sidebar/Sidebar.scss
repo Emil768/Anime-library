@@ -2,6 +2,9 @@
   border-right: 1px solid #e7e7e7;
   padding: 20px;
   flex: 1 1 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   &__title {
     margin-bottom: 10px;
   }
@@ -17,6 +20,47 @@
     &--active {
       border-color: #40b0ee;
       color: #40b0ee;
+    }
+  }
+  &__footer {
+    align-self: center;
+    &-link {
+      display: inline-block;
+      margin-right: 20px;
+      svg {
+        transition: all ease 0.3s;
+      }
+      &.vk-link {
+        &:hover {
+          svg {
+            fill: #2787f5;
+          }
+        }
+      }
+      &.instagram-link {
+        &:hover {
+          svg {
+            fill: #9a5f98;
+          }
+        }
+      }
+      &.telegram-link {
+        &:hover {
+          svg {
+            fill: #0088cc;
+          }
+        }
+      }
+      &.github-link {
+        &:hover {
+          svg {
+            fill: #525696;
+          }
+        }
+      }
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }

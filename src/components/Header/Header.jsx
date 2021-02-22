@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className="header">
       <div className="container">
-        <h1>Поиск аниме</h1>
+        <h1>Anime/manga library</h1>
       </div>
     </header>
   );
