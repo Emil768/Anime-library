@@ -57,14 +57,12 @@ function Main() {
       .then(res => dispatch(setAnime(res.data.results, type)));
   };
 
-  console.log("rerender content");
-
   return (
     <main className="main">
       <form className="search-box" onSubmit={HandleSearch}>
         <input
           className="search-box__input"
-          type="text"
+          type="search"
           placeholder="Поиск"
           value={search}
           onChange={e => setSearch(e.target.value)}
@@ -105,7 +103,7 @@ function Main() {
         ) : (
           <li className="anime-empty">
             <h2 className="anime-empty__title">
-              Аниме по названию "{search}" не найдены😟
+              По названию "{search}" ничего не найдено😟
             </h2>
             <figure>
               <img src={emptyGif} alt="" />

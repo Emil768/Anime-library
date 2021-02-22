@@ -64,3 +64,12 @@
     }
   }
 }
+
+@media (max-width: 575px) {
+  .sidebar {
+    border-right: 0;
+    &__list {
+      margin-bottom: 10px;
+    }
+  }
+}

@@ -174,9 +174,6 @@ function ModalFilter({ closeModal }) {
             />
           </li>
           <li className="filter-list__item">
-            <label>Сортировать по</label>
-          </li>
-          <li className="filter-list__item">
             <button className="modal__filter-btn" onClick={handlerSearchQuery}>
               Искать
             </button>

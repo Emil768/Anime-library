@@ -93,3 +93,19 @@
     }
   }
 }
+
+@media (max-width: 670px) {
+  .modal {
+    &__body {
+      flex-wrap: wrap;
+      &-left {
+        margin-bottom: 20px;
+      }
+    }
+    .list-item {
+      &__text {
+        max-height: 150px;
+      }
+    }
+  }
+}

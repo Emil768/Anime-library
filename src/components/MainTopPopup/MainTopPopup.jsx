@@ -14,7 +14,7 @@ function MainTopPopup() {
   const { type } = useSelector(state => state.anime);
 
   const [activeList, setActiveList] = useState(false);
-  const [activeItem, setActiveItem] = useState(0);
+  const [activeItem, setActiveItem] = useState(null);
 
   const topPopup = useRef();
 

@@ -12,7 +12,7 @@ function Sidebar() {
   const { type } = useSelector(state => state.anime);
   const sidebarList = [
     {
-      name: "Aниме",
+      name: "Аниме",
       type: "anime",
     },
     {

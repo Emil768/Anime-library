@@ -1,6 +1,8 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
+import "./AnimeCardLoader.scss";
+
 const Loader = props => (
   <ContentLoader
     speed={2}
@@ -9,6 +11,7 @@ const Loader = props => (
     viewBox="0 0 221 395"
     backgroundColor="#f0f0f0"
     foregroundColor="#dedede"
+    className="content-loader"
     {...props}
   >
     <rect x="10" y="33" rx="16" ry="16" width="205" height="300" />
