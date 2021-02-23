@@ -1,13 +1,14 @@
 .App__content {
-  max-width: 1200px;
-  min-height: 800px;
-  display: flex;
-  justify-content: space-between;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.09);
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 800px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.09);
 }
 
 @media (max-width: 575px) {
-  .App__content {
-    flex-wrap: wrap;
-  }
+    .App__content {
+        flex-wrap: wrap;
+    }
 }
