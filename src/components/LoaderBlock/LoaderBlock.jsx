@@ -1,9 +1,9 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-import "./AnimeCardLoader.scss";
+import "./LoaderBlock.scss";
 
-const Loader = props => (
+const LoaderBlock = props => (
   <ContentLoader
     speed={2}
     width={221}
@@ -19,4 +19,4 @@ const Loader = props => (
   </ContentLoader>
 );
 
-export default Loader;
+export default LoaderBlock;

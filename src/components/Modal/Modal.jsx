@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./Modal.scss";
@@ -10,22 +10,30 @@ import ModalInfo from "../ModalInfo/ModalInfo";
 function Modal({ data }) {
   const dispatch = useDispatch();
 
-  // const testState = useSelector(test => console.log(test));
   const { state, type } = useSelector(state => state.modal);
 
   const handlerCloseModal = () => {
     dispatch(setModalClose(false, ""));
   };
 
-  return (
-    <div className={state ? "modal modal--active" : "modal"}>
-      {type === "filter" ? (
-        <ModalFilter closeModal={handlerCloseModal} />
-      ) : (
-        <ModalInfo data={data} closeModal={handlerCloseModal} />
-      )}
+  if(state){
+    document.body.classList.add("hidden")
+  }
+  else{
+    document.body.classList.remove("hidden")
+  }
 
-      <div className="modal__overside" onClick={handlerCloseModal}></div>
+
+  return (
+    <div className={state ? "modal modal--active" : "modal"} onClick={handlerCloseModal}>
+      <div className="modal__content" onClick={e=>e.stopPropagation()}>
+        {type === "filter" ? (
+          <ModalFilter closeModal={handlerCloseModal} />
+        ) : (
+          <ModalInfo data={data} closeModal={handlerCloseModal} />
+        )}
+      </div>
+
     </div>
   );
 }

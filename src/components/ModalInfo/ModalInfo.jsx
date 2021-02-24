@@ -15,7 +15,7 @@ function ModalInfo({ data, closeModal }) {
   const searchTitleAnime = data && data.title.replace(/[ ,:]/g, "_");
 
   return (
-    <div className="modal__content">
+    <>
       <div className="modal__header">
         <h2 className="modal__title" title={`(${data.title_japanese})`}>
           {data.title_english ? data.title_english : data.title}{" "}
@@ -176,7 +176,7 @@ function ModalInfo({ data, closeModal }) {
         </div>
       </div>
       <div className="modal__footer"></div>
-    </div>
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 
 import Sidebar from "../Sidebar/Sidebar";
 import Main from "../Main/Main";
@@ -7,7 +7,7 @@ import "./Content.scss";
 
 //redux
 import { setAnime, setLoaded } from "../../redux/actions/anime";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import axios from "axios";
 

@@ -1,0 +1,54 @@
+{
+    "animeList": [{
+            "name": "Онгоинги",
+            "type": "airing"
+        },
+        {
+            "name": "Ожидаемые",
+            "type": "upcoming"
+        },
+        {
+            "name": "Сериалы",
+            "type": "tv"
+        },
+        {
+            "name": "Фильмы",
+            "type": "movie"
+        },
+
+        {
+            "name": "OVA",
+            "type": "ova"
+        },
+        {
+            "name": "Спэшлы",
+            "type": "special"
+        }
+    ],
+    "mangaList": [{
+            "name": "Манга",
+            "type": "manga"
+        },
+        {
+            "name": "Новеллы",
+            "type": "novels"
+        },
+        {
+            "name": "Ваншоты",
+            "type": "oneshots"
+        },
+        {
+            "name": "Додзинси",
+            "type": "doujin"
+        },
+
+        {
+            "name": "Манхва",
+            "type": "manhwa"
+        },
+        {
+            "name": "Маньхуа",
+            "type": "manhua"
+        }
+    ]
+}

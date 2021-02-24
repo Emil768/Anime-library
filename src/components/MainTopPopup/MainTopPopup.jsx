@@ -7,7 +7,7 @@ import { setAnime, setLoaded } from "../../redux/actions/anime";
 
 import axios from "axios";
 
-import { animeList, mangaList } from "../../topListDb.json";
+import { animeList, mangaList } from "../../db/topList.json";
 
 function MainTopPopup() {
   const dispatch = useDispatch();

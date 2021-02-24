@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./Main.scss";
 
 import AnimeCard from "../AnimeCard/AnimeCard";
-import Loader from "../AnimeCard/AnimeCardLoader";
+import LoaderBlock from "../LoaderBlock/LoaderBlock";
 import emptyGif from "../../img/anime-empty.gif";
 import { IoSettingsOutline } from "react-icons/io5";
 
@@ -67,12 +67,12 @@ function Main() {
           value={search}
           onChange={e => setSearch(e.target.value)}
           minLength={3}
-          maxLength={40}
+          maxLength={26}
           required
         />
       </form>
       <div className="main__panel">
-        <h3>Найдено результатов: {`(${items.length})`}</h3>
+        <h3 className="main__panel-title">Найдено результатов: {`(${items.length})`}</h3>
         <button className="main__panel-filter" onClick={handlerFilterInfo}>
           <span>Фильтр</span>
           <IoSettingsOutline size={20} />
@@ -85,8 +85,10 @@ function Main() {
         className={items.length ? "anime-list" : "anime-list anime-list--empty"}
       >
         {items.length ? (
-          isLoaded ? (
-            items.map(anime => {
+          isLoaded ? 
+           
+             (
+             items.map(anime => {
               return (
                 <AnimeCard
                   key={anime.mal_id}
@@ -95,10 +97,12 @@ function Main() {
                 />
               );
             })
-          ) : (
+          )
+          :
+          (
             Array(items.length)
               .fill(0)
-              .map((_, index) => <Loader key={index} />)
+              .map((_, index) => <LoaderBlock key={index} />)
           )
         ) : (
           <li className="anime-empty">

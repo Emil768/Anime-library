@@ -1,0 +1,28 @@
+.content-loader {
+    flex: 1 1 20.333%;
+}
+
+@media (max-width: 1110px) {
+    .content-loader {
+        flex: 1 1 26.333%;
+    }
+}
+
+@media (max-width: 870px) {
+    .content-loader {
+        flex: 1 1 35.333%;
+    }
+}
+
+@media (max-width: 670px) {
+    .content-loader {
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 575px) {
+    .content-loader {
+        flex: 1 1 35.333%;
+        height: 100%;
+    }
+}

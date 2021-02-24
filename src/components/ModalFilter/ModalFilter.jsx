@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 
 import "./ModalFilter.scss";
 
@@ -17,7 +17,7 @@ import {
   statusOptions,
   ratingOptions,
   orderOptions,
-} from "../../filterOptions.json";
+} from "../../db/filterOptions.json";
 
 import { setAnime, setLoaded } from "../../redux/actions/anime";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +28,7 @@ function ModalFilter({ closeModal }) {
   moment.locale("ru");
 
   const { type } = useSelector(state => state.anime);
+  
 
   const handlerCloseModal = () => {
     closeModal();
@@ -42,7 +43,7 @@ function ModalFilter({ closeModal }) {
   const [endDateValue, setEndDateValue] = useState("");
   const [ratingValue, setRatingValue] = useState("");
   const [orderValue, setOrderValue] = useState(orderOptions[3]);
-  const [sortValue, setSortValue] = useState("");
+
 
   const handleChangeGenre = genre => {
     setGenreValue(genre);
@@ -67,7 +68,6 @@ function ModalFilter({ closeModal }) {
     setOrderValue(order);
   };
 
-  const numbers = Array.from(Array(20), () => 0);
 
   const handlerSearchQuery = () => {
     dispatch(setLoaded(false));
@@ -90,10 +90,9 @@ function ModalFilter({ closeModal }) {
       .then(res => dispatch(setAnime(res.data.results, type)));
   };
 
-  console.log(orderOptions[3].value);
 
   return (
-    <div className="modal__content modal__filter">
+    <>
       <div className="modal__header">
         <h2 className="modal__title">Фильтр</h2>
         <button className="modal__btn" onClick={handlerCloseModal}>
@@ -181,7 +180,7 @@ function ModalFilter({ closeModal }) {
         </ul>
       </div>
       <div className="modal__footer"></div>
-    </div>
+    </>
   );
 }
 
